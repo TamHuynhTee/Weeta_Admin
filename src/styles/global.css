@@ -24,6 +24,31 @@ input[type='email']:disabled {
   background-color: #f1f3f4;
   opacity: 0.7;
 }
+input[type='password']::-ms-reveal {
+  display: none;
+}
+
+table > thead > tr > th {
+  font-weight: 700;
+  padding: 10px;
+}
+table > tbody > tr > td {
+  font-weight: 400;
+  padding: 10px;
+  text-align: center;
+}
+table > tbody > tr {
+  border-top: 1px solid #ebebeb;
+  border-bottom: 1px solid #ebebeb;
+  transition: all 0.3s;
+}
+table > tbody > tr:first-child {
+  border-top: none;
+}
+
+table > tbody > tr:last-child {
+  border-bottom: none;
+}
 
 .content p {
   @apply my-6;
@@ -325,8 +350,12 @@ input[type='number'] {
   display: block;
 }
 
+.wrap_menuAvatar .iconAvatar {
+  outline: 1px solid #fff;
+}
+
 .wrap_menuAvatar:hover .iconAvatar {
-  outline: 3px solid #59ada4;
+  outline: 3px solid #fff;
 }
 
 .wrap_menuAvatar .menuProfile {
@@ -448,4 +477,48 @@ input[name='idCheckBox']:checked ~ .overlayCheckbox {
 .selectBox::-webkit-scrollbar-thumb:hover {
   @apply bg-gray-300;
   opacity: 0.5;
+}
+
+.nav-item {
+  width: 250px;
+  position: relative;
+  margin-bottom: 1px;
+  transition: all 0.5s;
+  border: 1px solid transparent;
+  border-width: 1px 0;
+}
+.nav-item:hover {
+  @apply bg-[#e2e5ea];
+}
+
+.nav-item-link {
+  padding: 8px 8px 8px 16px;
+  display: flex;
+  font-size: 20px;
+  font-weight: 600;
+  @apply text-gray-400;
+}
+.nav-item.active {
+  background: #fff;
+  border: 1px solid #e1e4e7;
+  border-width: 1px 0;
+}
+.nav-item.active .nav-item-link::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  right: 0;
+  @apply border-baseColor;
+  border-left-width: 0.25rem;
+}
+.nav-item.active > .nav-item-link {
+  @apply text-baseColor;
+}
+
+.nav-item-caption {
+  display: flex;
+  align-items: center;
+  padding: 0 0.325rem;
+  margin: 0.5rem 0;
 }

@@ -31,6 +31,7 @@ import {
 import { State } from '.';
 import { DEFAULT_SERVER_ERROR_MESSAGE } from '..';
 import socketService from '@/services/sockets/baseSocket';
+import { ROLE } from '@/constants/base.constants';
 
 type Actions = { setState: any; getState: () => State; dispatch: any };
 
@@ -38,6 +39,10 @@ export const loginAsync = (payload: IReqLogin) => async () => {
   const result = await loginService(payload);
   if (result.error !== undefined) {
     if (!result.error) {
+      if (result.data.role !== ROLE.ADMIN) {
+        notifyError('Vui lòng đăng nhập bằng quyền quản trị');
+        return false;
+      }
       saveToLocalStorage('token', result.data.token);
       notifySuccess('Đăng nhập thành công');
       return true;

@@ -1,7 +1,6 @@
 import { ARTICLE_MODEL } from '@/models/Article.model';
 import { createHook, createStore } from 'react-sweet-state';
 import {
-  createArticleAsync,
   getListArticleAsync,
   getListTopArticleAsync,
   loadMoreArticleAsync,
@@ -43,7 +42,6 @@ const initialState: State = {
 };
 
 const actions = {
-  createArticleAsync,
   getListArticleAsync,
   getListTopArticleAsync,
   loadMoreArticleAsync,

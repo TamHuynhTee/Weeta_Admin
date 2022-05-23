@@ -1,15 +1,11 @@
-import { notifyError, notifySuccess } from '@/helpers/toast.helpers';
+import { notifyError } from '@/helpers/toast.helpers';
 import { ARTICLE_MODEL } from '@/models/Article.model';
 import {
-  createArticleService,
   getDetailArticleService,
   getListArticleService,
   getListTopArticleService,
 } from '@/services/apis/Article';
-import {
-  IParamGetArticle,
-  IReqCreateArticle,
-} from '@/services/apis/Article/Article.interface';
+import { IParamGetArticle } from '@/services/apis/Article/Article.interface';
 import { defaultRegistry } from 'react-sweet-state';
 import { State } from '.';
 import { Store } from '../Auth';
@@ -109,20 +105,6 @@ export const getDetailArticleAsync =
     // notifyError(result.message);
     return false;
   };
-
-export const createArticleAsync = (payload: IReqCreateArticle) => async () => {
-  authInstance.actions.setAppLoading(true);
-  const result = await createArticleService(payload);
-  authInstance.actions.setAppLoading(false);
-  if (result.error !== undefined) {
-    if (!result.error) {
-      notifySuccess('Tạo bài viết thành công.');
-      return true;
-    }
-  }
-  notifyError(result.message);
-  return false;
-};
 
 export const setDetailArticle =
   (article: ARTICLE_MODEL | undefined) =>

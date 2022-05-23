@@ -6,6 +6,7 @@ export enum BASE_CONSTANTS {
 export enum ROLE {
   USER = 'user',
   LESSOR = 'lessor',
+  ADMIN = 'admin',
 }
 
 export enum ACCOUNT_GENDER {
@@ -27,11 +28,3 @@ export enum ENUM_MESSAGE_MODE {
 }
 
 export const DEFAULT_DATE_START = '2021-01-01';
-
-export const HOME_BANNER_CAROUSEL = [
-  '/images/img_home_image_1.jpg',
-  '/images/img_home_image_2.jpg',
-  '/images/img_home_image_3.jpg',
-  '/images/img_home_image_4.jpg',
-  '/images/img_home_image_5.jpg',
-];

@@ -3,6 +3,7 @@
 */
 
 /* eslint-disable react-hooks/exhaustive-deps */
+import LoginPage from '@/pages/dang-nhap';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { ROLE } from '../constants/base.constants';
@@ -46,7 +47,7 @@ const Authentication = (
       if (stateAuth.isLoggedIn) {
         return <SpecificComponent {...props} />;
       } else {
-        return <div>Loading...</div>;
+        return <h1>Loading...</h1>; // <LoginPage />;
       }
     } else {
       return <SpecificComponent {...props} />;

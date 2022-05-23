@@ -36,11 +36,13 @@ const Breadcrumb = (props: IProps) => {
           <div className="flex" key={index}>
             {breadcrumb_link.length > 1 &&
             index === breadcrumb_link.length - 1 ? (
-              <p className={`text-black font-normal`}>{item.value}</p>
+              <p className={`text-black text-[16px] font-normal`}>
+                {item.value}
+              </p>
             ) : (
               <AnchorLink
                 href={item.href}
-                className={`category-link text-grey-300 font-semibold`}
+                className={`category-link !text-[18px] text-grey-300 font-semibold`}
                 style={{ textDecoration: 'none' }}
               >
                 {item.value}

@@ -1,15 +1,13 @@
 .wrap_breadcrumb {
-  @apply bg-green-50;
-  width: 100%;
+  width: auto;
   height: 100%;
   display: flex;
   align-items: center;
-  position: relative;
-  padding-left: 20px;
+  /* position: relative; */
   flex-wrap: wrap;
 }
 
-.wrap_breadcrumb::before {
+/* .wrap_breadcrumb::before {
   @apply bg-green-600;
   position: absolute;
   content: '';
@@ -22,4 +20,4 @@
   -moz-border-radius: 20px;
   -ms-border-radius: 20px;
   -o-border-radius: 20px;
-}
+} */
