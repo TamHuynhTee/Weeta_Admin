@@ -51,7 +51,7 @@ const BoxManageArticle = () => {
               Đã duyệt
             </a>
           </Link>
-          <Link href={`/thong-tin-ca-nhan/quan-ly-bai-dang/chua-duyet`}>
+          <Link href={`/thong-tin-ca-nhan/quan-ly-bai-dang/cho-duyet`}>
             <a
               className={`text-black py-[10px] min-w-[100px] ${
                 !status && '!text-baseColor font-bold'

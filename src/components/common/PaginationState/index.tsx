@@ -20,7 +20,7 @@ const PaginationState = ({
   };
 
   return (
-    <div className="mt-[20px] flex justify-center">
+    <div className="flex justify-center">
       <div className="flex">
         {totalPages > 1 && currentPage !== 1 && (
           <button

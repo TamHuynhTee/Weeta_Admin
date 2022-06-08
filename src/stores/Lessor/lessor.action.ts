@@ -1,4 +1,6 @@
 import { notifyError } from '@/helpers/toast.helpers';
+import { getListLessorService } from '@/services/apis/Admin';
+import { IParamGetListLessor } from '@/services/apis/Admin/Admin.interface';
 import { getLessorArticleService } from '@/services/apis/Lessor';
 import { IReqGetLessorArticles } from '@/services/apis/Lessor/Lessor.interface';
 import { defaultRegistry } from 'react-sweet-state';
@@ -29,3 +31,68 @@ export const getLessorArticleAsync =
     notifyError(result.message);
     return false;
   };
+
+export const getListLessorAsync =
+  (params: Partial<IParamGetListLessor>) =>
+  async ({ setState, getState, dispatch }: Actions) => {
+    dispatch(setLoadingLessor(true));
+    const result = await getListLessorService(params);
+    dispatch(setLoadingLessor(false));
+    if (result.error !== undefined) {
+      if (!result.error) {
+        setState({
+          ...getState(),
+          lessors: {
+            list: result.data.users,
+            total: result.data.total,
+          },
+        });
+        return true;
+      }
+    }
+    notifyError(result.message);
+    return false;
+  };
+
+export const getListPendingLessorAsync =
+  (params: Partial<IParamGetListLessor>) =>
+  async ({ setState, getState, dispatch }: Actions) => {
+    //   Chưa có api
+    dispatch(setLoadingPendingLessor(true));
+    const result = await getListLessorService(params);
+    dispatch(setLoadingPendingLessor(false));
+    if (result.error !== undefined) {
+      if (!result.error) {
+        setState({
+          ...getState(),
+          pendingLessors: {
+            list: result.data.users,
+            total: result.data.total,
+          },
+        });
+        return true;
+      }
+    }
+    notifyError(result.message);
+    return false;
+  };
+
+const setLoadingLessor = (loading: boolean) => (actions: Actions) => {
+  actions.setState({
+    ...actions.getState(),
+    lessors: {
+      ...actions.getState().lessors,
+      loading: loading,
+    },
+  });
+};
+
+const setLoadingPendingLessor = (loading: boolean) => (actions: Actions) => {
+  actions.setState({
+    ...actions.getState(),
+    pendingLessors: {
+      ...actions.getState().pendingLessors,
+      loading: loading,
+    },
+  });
+};

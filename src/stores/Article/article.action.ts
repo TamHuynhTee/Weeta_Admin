@@ -1,9 +1,12 @@
 import { notifyError } from '@/helpers/toast.helpers';
 import { ARTICLE_MODEL } from '@/models/Article.model';
 import {
+  approveArticleService,
+  rejectArticleService,
+} from '@/services/apis/Admin';
+import {
   getDetailArticleService,
   getListArticleService,
-  getListTopArticleService,
 } from '@/services/apis/Article';
 import { IParamGetArticle } from '@/services/apis/Article/Article.interface';
 import { defaultRegistry } from 'react-sweet-state';
@@ -17,7 +20,10 @@ export const getListArticleAsync =
   (params: Partial<IParamGetArticle>) =>
   async ({ getState, setState, dispatch }: Actions) => {
     dispatch(setLoadingArticle(true));
-    const result = await getListArticleService(params);
+    const result = await getListArticleService({
+      ...params,
+      isApproved: true,
+    });
     dispatch(setLoadingArticle(false));
     if (result.error !== undefined) {
       if (!result.error) {
@@ -25,7 +31,7 @@ export const getListArticleAsync =
           ...getState(),
           article: {
             ...getState().article,
-            list: result.data.data,
+            list: result.data.listData,
             total: result.data.total,
             isOver: result.data.isOver,
           },
@@ -37,45 +43,22 @@ export const getListArticleAsync =
     return false;
   };
 
-export const loadMoreArticleAsync =
-  (params: Partial<IParamGetArticle>) =>
-  async ({ getState, setState }: Actions) => {
-    authInstance.actions.setAppLoading(true);
-    const result = await getListArticleService(params);
-    authInstance.actions.setAppLoading(false);
-    if (result.error !== undefined) {
-      if (!result.error) {
-        const currentList = [...getState().article.list, ...result.data.data];
-        console.log(`currentList`, currentList);
-        setState({
-          ...getState(),
-          article: {
-            ...getState().article,
-            list: currentList,
-            total: result.data.total,
-            isOver: result.data.isOver,
-          },
-        });
-        return true;
-      }
-    }
-    notifyError(result.message);
-    return false;
-  };
-
-export const getListTopArticleAsync =
+export const getListPendingArticleAsync =
   (params: Partial<IParamGetArticle>) =>
   async ({ getState, setState, dispatch }: Actions) => {
-    dispatch(setLoadingTOPArticle(true));
-    const result = await getListTopArticleService(params);
-    dispatch(setLoadingTOPArticle(false));
+    dispatch(setLoadingPendingArticle(true));
+    const result = await getListArticleService({
+      ...params,
+      isApproved: false,
+    });
+    dispatch(setLoadingPendingArticle(false));
     if (result.error !== undefined) {
       if (!result.error) {
         setState({
           ...getState(),
-          topArticle: {
-            ...getState().article,
-            list: result.data.data,
+          pendingArticle: {
+            ...getState().pendingArticle,
+            list: result.data.listData,
             total: result.data.total,
             isOver: result.data.isOver,
           },
@@ -125,13 +108,61 @@ const setLoadingArticle = (loadingArticle: boolean) => (actions: Actions) => {
   });
 };
 
-const setLoadingTOPArticle =
+const setLoadingPendingArticle =
   (loadingArticle: boolean) => (actions: Actions) => {
     actions.setState({
       ...actions.getState(),
-      topArticle: {
-        ...actions.getState().topArticle,
+      pendingArticle: {
+        ...actions.getState().pendingArticle,
         loading: loadingArticle,
       },
     });
+  };
+
+export const approveArticleAsync =
+  (payload: { email: string; articleId: string }) =>
+  async ({ getState, setState }: Actions) => {
+    const result = await approveArticleService(payload);
+    if (result.error !== undefined) {
+      if (!result.error) {
+        const newList = [...getState().pendingArticle.list].filter(
+          (item) => item._id === payload.articleId
+        );
+        setState({
+          ...getState(),
+          pendingArticle: {
+            ...getState().pendingArticle,
+            list: newList,
+            total: getState().pendingArticle.total - 1,
+          },
+        });
+        return true;
+      }
+    }
+    notifyError(result.message);
+    return false;
+  };
+
+export const rejectArticleAsync =
+  (payload: { email: string; articleId: string; reasonReject: string }) =>
+  async ({ getState, setState }: Actions) => {
+    const result = await rejectArticleService(payload);
+    if (result.error !== undefined) {
+      if (!result.error) {
+        const newList = [...getState().pendingArticle.list].filter(
+          (item) => item._id === payload.articleId
+        );
+        setState({
+          ...getState(),
+          pendingArticle: {
+            ...getState().pendingArticle,
+            list: newList,
+            total: getState().pendingArticle.total - 1,
+          },
+        });
+        return true;
+      }
+    }
+    notifyError(result.message);
+    return false;
   };

@@ -2,10 +2,11 @@ import { ARTICLE_MODEL } from '@/models/Article.model';
 import { createHook, createStore } from 'react-sweet-state';
 import {
   getListArticleAsync,
-  getListTopArticleAsync,
-  loadMoreArticleAsync,
+  getListPendingArticleAsync,
   getDetailArticleAsync,
   setDetailArticle,
+  approveArticleAsync,
+  rejectArticleAsync,
 } from './article.action';
 import { selector } from './article.selector';
 
@@ -16,7 +17,7 @@ export type State = {
     isOver: boolean;
     loading: boolean;
   };
-  topArticle: {
+  pendingArticle: {
     list: Array<ARTICLE_MODEL>;
     total: number;
     isOver: boolean;
@@ -32,7 +33,7 @@ const initialState: State = {
     isOver: false,
     loading: false,
   },
-  topArticle: {
+  pendingArticle: {
     list: [],
     total: 0,
     isOver: false,
@@ -43,10 +44,11 @@ const initialState: State = {
 
 const actions = {
   getListArticleAsync,
-  getListTopArticleAsync,
-  loadMoreArticleAsync,
+  getListPendingArticleAsync,
   getDetailArticleAsync,
   setDetailArticle,
+  approveArticleAsync,
+  rejectArticleAsync,
 };
 
 const Store = createStore({

@@ -1,6 +1,9 @@
 import Breadcrumb from '@/components/common/BreadCrumb';
+import LineHorizontal from '@/components/common/LineHorizontal';
+import LoadingComponent from '@/components/common/LoadingComponent';
 import PaginationState from '@/components/common/PaginationState';
 import LayoutCommon from '@/components/layout/LayoutCommon';
+import NoResults from '@/components/pages/thue-tro/NoResults';
 import { useArticle } from '@/stores/Article';
 import dayjs from 'dayjs';
 import React from 'react';
@@ -20,7 +23,7 @@ const ArticleList = () => {
             ]}
           />
           <div className="mt-[10px]">
-            <TableArticleNotVerified />
+            <TableArticle />
           </div>
         </div>
       </LayoutCommon>
@@ -28,14 +31,21 @@ const ArticleList = () => {
   );
 };
 
-const TableArticleNotVerified = () => {
+const TableArticle = () => {
   const [currentPage, setCurrentPage] = React.useState(1);
   const [stateArticle, actionArticle] = useArticle();
+
+  const showRangeResult = `${
+    stateArticle.articles.total > 0 ? (currentPage - 1) * LIMIT + 1 : 0
+  } - ${
+    LIMIT * currentPage > stateArticle.articles.total
+      ? stateArticle.articles.total
+      : LIMIT * currentPage
+  }`;
 
   React.useEffect(() => {
     (async () => {
       await actionArticle.getListArticleAsync({
-        isApproved: false,
         limit: LIMIT,
         page: currentPage,
       });
@@ -43,9 +53,10 @@ const TableArticleNotVerified = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
-  return (
+  return stateArticle.articles.loading ? (
+    <LoadingComponent />
+  ) : stateArticle.articles.list.length > 0 ? (
     <>
-      <p className="">Danh sách chưa duyệt</p>
       <table className="w-full">
         <thead className="bg-baseColor text-white rounded-[3px]">
           <tr>
@@ -59,8 +70,8 @@ const TableArticleNotVerified = () => {
         <tbody className="">
           {stateArticle.articles.list.map((item, index) => (
             <tr key={index} className="hover:bg-slate-100 cursor-pointer">
-              <td>{index + 1}</td>
-              <td className="max_line1">{item.title}</td>
+              <td>{index + 1 + (currentPage - 1) * LIMIT}</td>
+              <td className="max_line-1">{item.title}</td>
               <td>{dayjs(item.createdAt).format('DD/MM/YYYY')}</td>
               <td>{item.lessor?.fullname}</td>
               <td>Hành động</td>
@@ -68,13 +79,29 @@ const TableArticleNotVerified = () => {
           ))}
         </tbody>
       </table>
-      <PaginationState
-        total={stateArticle.articles.total}
-        limit={LIMIT}
-        setCurrentPage={setCurrentPage}
-        currentPage={currentPage}
-      />
+      <LineHorizontal className="my-[20px]" />
+      <div className="flex items-center justify-between">
+        <div className="">
+          <p className="">
+            Đang hiển thị{' '}
+            <span className="text-baseColor font-bold">{showRangeResult}</span>{' '}
+            trong{' '}
+            <span className="text-baseColor font-bold">
+              {stateArticle.articles.total}
+            </span>{' '}
+            kết quả
+          </p>
+        </div>
+        <PaginationState
+          total={stateArticle.articles.total}
+          limit={LIMIT}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+        />
+      </div>
     </>
+  ) : (
+    <NoResults icon="/icons/ic_no_articles.png" text="Chưa có bài viết" />
   );
 };
 

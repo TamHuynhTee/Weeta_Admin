@@ -47,7 +47,7 @@ const NavLogged = () => {
             </Link>
             <div className="lineMenu"></div> */}
             <button
-              className="menuProfile menuLinkHover text-red-500 font-bold"
+              className="menuProfile menuLinkHover !text-red-500 font-bold"
               onClick={handleLogout}
             >
               Đăng xuất

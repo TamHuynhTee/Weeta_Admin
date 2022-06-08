@@ -10,13 +10,7 @@ const url = RouteApi.article;
 export const getListArticleService = (
   params: Partial<IParamGetArticle>
 ): Promise<ReturnResponse<resGetListArticle>> => {
-  return API.get(`${url}/getListArticle`, { ...params }) as any;
-};
-
-export const getListTopArticleService = (
-  params: Partial<IParamGetArticle>
-): Promise<ReturnResponse<resGetListArticle>> => {
-  return API.get(`${url}/get-list-tin-top`, { ...params }) as any;
+  return API.get(`${url}/searchArticle`, { ...params }) as any;
 };
 
 export const getDetailArticleService = (

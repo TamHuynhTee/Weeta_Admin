@@ -2,7 +2,7 @@ import { State } from './index';
 export const selector = (state: State) => {
   return {
     articles: state.article,
-    topArticles: state.topArticle,
+    pendingArticles: state.pendingArticle,
     articleDetail: state.articleDetail,
   };
 };
