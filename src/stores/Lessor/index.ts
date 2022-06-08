@@ -5,6 +5,7 @@ import {
   getLessorArticleAsync,
   getListLessorAsync,
   getListPendingLessorAsync,
+  approveIdentityAsync,
 } from './lessor.action';
 import { selector } from './lessor.selector';
 
@@ -54,6 +55,7 @@ const actions = {
   getLessorArticleAsync,
   getListLessorAsync,
   getListPendingLessorAsync,
+  approveIdentityAsync,
 };
 
 const Store = createStore({

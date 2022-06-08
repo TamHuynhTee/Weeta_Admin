@@ -1,11 +1,14 @@
+import ContainerModal from '@/components/common/ContainerModal';
 import InputField from '@/components/common/InputField';
-import LimitedTextArea from '@/components/common/LimitedTextArea';
 import { useAuth } from '@/stores/Auth';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import BoxMenuAvatar from '../BoxAvatar';
+import ModalAvatar from '../ModalAvatar';
 
 const BoxProfile = () => {
   const [stateAuth, actionAuth] = useAuth();
+  const [modalAvatar, setModalAvatar] = React.useState(false);
 
   const {
     register,
@@ -20,7 +23,6 @@ const BoxProfile = () => {
       setValue('fullname', stateAuth.auth.fullname);
       setValue('email', stateAuth.auth.email);
       setValue('phoneNumber', stateAuth.auth.phoneNumber);
-      setValue('introduction', stateAuth.auth.introduction);
     }
   }, [stateAuth.auth, setValue]);
 
@@ -33,11 +35,10 @@ const BoxProfile = () => {
   //   console.log(stateAuth.auth);
 
   return (
-    <div className="container_shadow">
+    <div className="mx-auto max-w-[700px] my-[50px]">
+      <p className="text-black-100 text-[24px] font-bold">Thông tin cá nhân</p>
+      <BoxMenuAvatar openModal={() => setModalAvatar(true)} />
       <form className="w-full" onSubmit={handleSubmit(handleEditProfile)}>
-        <p className="text-black-100 text-[24px] font-bold">
-          Thông tin cá nhân
-        </p>
         <div className="mt-[20px]">
           <InputField
             type="text"
@@ -80,28 +81,18 @@ const BoxProfile = () => {
             disabled
           />
         </div>
-        <div className="mt-[20px]">
-          <label
-            htmlFor="introduction"
-            className="block font-semibold mb-[10px]"
-          >
-            Tự giới thiệu
-          </label>
-          <LimitedTextArea
-            name="introduction"
-            id="introduction"
-            registerForm={register('introduction')}
-            limit={600}
-            value=""
-            placeholder="Giới thiệu bản thân"
-          />
-        </div>
         <input
           type="submit"
           className="button-primary w-32 mt-[30px] h-[40px] md:mt-[20px] md:h-[30px]"
           value="Lưu"
         />
       </form>
+      <ContainerModal
+        isVisible={modalAvatar}
+        closeModal={() => setModalAvatar(false)}
+      >
+        <ModalAvatar closeModal={() => setModalAvatar(false)} />
+      </ContainerModal>
     </div>
   );
 };

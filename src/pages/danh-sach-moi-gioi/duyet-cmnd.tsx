@@ -106,7 +106,10 @@ const TableLessorPendingIdentity = () => {
       </div>
     </>
   ) : (
-    <NoResults icon="/icons/ic_no_users.png" text="Chưa có người dùng" />
+    <NoResults
+      icon="/icons/ic_no_users.png"
+      text="Chưa có yêu cầu duyệt CMND"
+    />
   );
 };
 

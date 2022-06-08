@@ -18,13 +18,11 @@
 
 .sidebar::-webkit-scrollbar-track {
   background-color: transparent;
-  border-radius: 2px;
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-  border-radius: 2px;
   border: 1px solid transparent;
-  background-clip: content-box;
+  /* background-clip: content-box; */
   /* background-color: #c4c4c4; */
   background-color: #d1d2d3;
 }

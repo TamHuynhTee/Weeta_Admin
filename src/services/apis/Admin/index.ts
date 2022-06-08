@@ -32,6 +32,12 @@ export const rejectArticleService = ({
   }) as any;
 };
 
+export const approveIdentityService = (
+  accountId: string
+): Promise<ReturnResponse<any>> => {
+  return API.post(`${url}/approvedIDCard/${accountId}`) as any;
+};
+
 export const getListUserService = (
   params: Partial<IParamGetListUser>
 ): Promise<ReturnResponse<resGetListUser>> => {
@@ -42,4 +48,10 @@ export const getListLessorService = (
   params: Partial<IParamGetListLessor>
 ): Promise<ReturnResponse<resGetListUser>> => {
   return API.get(`${url}/get-list-lessor`, { ...params }) as any;
+};
+
+export const getListPendingLessorService = (
+  params: Partial<IParamGetListLessor>
+): Promise<ReturnResponse<resGetListUser>> => {
+  return API.get(`${url}/list-lessor-need-autoapproved`, { ...params }) as any;
 };

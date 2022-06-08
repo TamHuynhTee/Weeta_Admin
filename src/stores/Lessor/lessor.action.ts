@@ -1,5 +1,9 @@
 import { notifyError } from '@/helpers/toast.helpers';
-import { getListLessorService } from '@/services/apis/Admin';
+import {
+  approveIdentityService,
+  getListLessorService,
+  getListPendingLessorService,
+} from '@/services/apis/Admin';
 import { IParamGetListLessor } from '@/services/apis/Admin/Admin.interface';
 import { getLessorArticleService } from '@/services/apis/Lessor';
 import { IReqGetLessorArticles } from '@/services/apis/Lessor/Lessor.interface';
@@ -59,7 +63,7 @@ export const getListPendingLessorAsync =
   async ({ setState, getState, dispatch }: Actions) => {
     //   Chưa có api
     dispatch(setLoadingPendingLessor(true));
-    const result = await getListLessorService(params);
+    const result = await getListPendingLessorService(params);
     dispatch(setLoadingPendingLessor(false));
     if (result.error !== undefined) {
       if (!result.error) {
@@ -68,6 +72,29 @@ export const getListPendingLessorAsync =
           pendingLessors: {
             list: result.data.users,
             total: result.data.total,
+          },
+        });
+        return true;
+      }
+    }
+    notifyError(result.message);
+    return false;
+  };
+
+export const approveIdentityAsync =
+  (accountId: string) =>
+  async ({ setState, getState }: Actions) => {
+    const result = await approveIdentityService(accountId);
+    if (result.error !== undefined) {
+      if (!result.error) {
+        const newList = [...getState().pendingLessors.list].filter(
+          (item) => item._id === accountId
+        );
+        setState({
+          ...getState(),
+          pendingLessors: {
+            list: newList,
+            total: getState().pendingLessors.total - 1,
           },
         });
         return true;

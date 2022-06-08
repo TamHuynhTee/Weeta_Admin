@@ -29,7 +29,7 @@ const BoxChangePass = () => {
   };
 
   return (
-    <div className="container_shadow">
+    <div className="max-w-[700px] mx-auto mt-[50px]">
       <form className="w-full" onSubmit={handleSubmit(handleChangePass)}>
         <p className="text-black-100 text-[24px] font-bold">Đổi mật khẩu</p>
         <div className="mt-[20px]">

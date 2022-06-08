@@ -108,11 +108,25 @@ const SideBar = ({ className }: { className?: string }) => {
     {
       href: '/thong-tin-ca-nhan',
       icons: '/icons/ic_sidebar_profile.svg',
-      label: 'Thông tin cá nhân',
-      isLink: true,
+      label: 'Hồ sơ cá nhân',
+      isLink: false,
       activeCondition:
         getSplitPathName(router.pathname, 1) === 'thong-tin-ca-nhan',
-      childList: [],
+      childList: [
+        {
+          href: '/thong-tin-ca-nhan/ho-so',
+          icons: '/icons/ic_sidebar_info.svg',
+          label: 'Thông tin',
+          activeCondition: getSplitPathName(router.pathname, 2) === 'ho-so',
+        },
+        {
+          href: '/thong-tin-ca-nhan/doi-mat-khau',
+          icons: '/icons/ic_sidebar_password.svg',
+          label: 'Đổi mật khẩu',
+          activeCondition:
+            getSplitPathName(router.pathname, 2) === 'doi-mat-khau',
+        },
+      ],
     },
   ];
 
@@ -139,7 +153,7 @@ const SideBar = ({ className }: { className?: string }) => {
       <MenuList caption="Quản lý" list={SIDEBAR_MANAGE_LIST} />
       <MenuList caption="Cá nhân" list={SIDEBAR_PROFILE_LIST} />
       {/* Footer */}
-      <div className="mt-auto my-[10px] px-[16px]">
+      <div className="mt-auto my-[10px] px-[16px] pt-[10px]">
         <p className="text-center text-[14px] font-semibold">
           &#169; WEETA HOUSING - {dayjs().get('year')}
         </p>
