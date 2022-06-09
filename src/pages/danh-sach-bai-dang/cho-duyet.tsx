@@ -55,7 +55,7 @@ const TableArticleNotVerified = () => {
 
   return stateArticle.pendingArticles.loading ? (
     <LoadingComponent />
-  ) : stateArticle.articles.list.length > 0 ? (
+  ) : stateArticle.pendingArticles.list.length > 0 ? (
     <>
       <table className="w-full">
         <thead className="bg-baseColor text-white rounded-[3px]">
