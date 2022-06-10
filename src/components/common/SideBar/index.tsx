@@ -80,7 +80,7 @@ const SideBar = ({ className }: { className?: string }) => {
         {
           href: '/danh-sach-moi-gioi/duyet-cmnd',
           icons: '/icons/ic_sidebar_identity.svg',
-          label: 'Duyệt cmnd',
+          label: 'Duyệt CMND',
           activeCondition:
             getSplitPathName(router.pathname, 2) === 'duyet-cmnd',
         },
@@ -98,9 +98,22 @@ const SideBar = ({ className }: { className?: string }) => {
       href: '/bao-cao',
       icons: '/icons/ic_sidebar_report.svg',
       label: 'Báo cáo',
-      isLink: true,
+      isLink: false,
       activeCondition: getSplitPathName(router.pathname, 1) === 'bao-cao',
-      childList: [],
+      childList: [
+        {
+          href: '/bao-cao/tiep-nhan',
+          icons: '/icons/ic_sidebar_receive.svg',
+          label: 'Tiếp nhận',
+          activeCondition: getSplitPathName(router.pathname, 2) === 'tiep-nhan',
+        },
+        {
+          href: '/bao-cao/ly-do',
+          icons: '/icons/ic_sidebar_reason.svg',
+          label: 'Lý do',
+          activeCondition: getSplitPathName(router.pathname, 2) === 'ly-do',
+        },
+      ],
     },
   ];
 

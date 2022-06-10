@@ -5,4 +5,5 @@ export enum RouteApi {
   lessor = 'lessor',
   conversation = 'conversation',
   message = 'message',
+  reportReason = 'report-reason',
 }

@@ -100,7 +100,7 @@ const TableLessor = () => {
       </div>
     </>
   ) : (
-    <NoResults icon="/icons/ic_no_lessors.png" text="Chưa có người dùng" />
+    <NoResults icon="/icons/ic_no_users.png" text="Chưa có người cho thuê" />
   );
 };
 

@@ -22,6 +22,17 @@ export enum ENUM_TYPE_ARTICLE {
   UP = 'UP',
 }
 
+export enum ENUM_TYPE_REASON {
+  ARTICLE = 'article',
+  LESSOR = 'lessor',
+}
+
+export const REASON_TYPE_FILTER = [
+  { label: 'Tất cả', value: '' },
+  { label: 'Bài viết', value: ENUM_TYPE_REASON.ARTICLE },
+  { label: 'Nhà môi giới', value: ENUM_TYPE_REASON.LESSOR },
+];
+
 export enum ENUM_MESSAGE_MODE {
   CHAT = 'CHAT',
   EDIT = 'EDIT',

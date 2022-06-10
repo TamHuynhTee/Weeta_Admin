@@ -31,21 +31,10 @@ const NavLogged = () => {
         </div>
         <div className="wrap_contentHover">
           <div className="contentHover py-[16px]">
-            <Link href="/thong-tin-ca-nhan">
+            <Link href="/thong-tin-ca-nhan/ho-so">
               <a className="menuProfile menuLinkHover">Thông tin cá nhân</a>
             </Link>
             <div className="lineMenu"></div>
-            {/* <Link href="/tin-nhan">
-              <a className="menuProfile menuLinkHover">Tin nhắn</a>
-            </Link> */}
-            {/* <div className="lineMenu"></div> */}
-            {/* <Link href="#!">
-              <a className="menuProfile menuLinkHover">Nhà trọ yêu thích</a>
-            </Link>
-            <Link href="#!">
-              <a className="menuProfile menuLinkHover">Bài đăng đã lưu</a>
-            </Link>
-            <div className="lineMenu"></div> */}
             <button
               className="menuProfile menuLinkHover !text-red-500 font-bold"
               onClick={handleLogout}

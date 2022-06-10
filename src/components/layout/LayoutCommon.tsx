@@ -59,7 +59,7 @@ const LayoutCommon: FC<IProps> = ({
               </div>
             </div>
           </header>
-          <div className="min-h-[calc(100%-60px)] max-h-[calc(100%-60px)] overflow-y-auto">
+          <div className="min-h-[calc(100%-60px)] max-h-[calc(100%-60px)] overflow-y-auto bg-[#f7f7f8]">
             <div className="mx-[30px]">{children}</div>
           </div>
         </div>
