@@ -27,6 +27,11 @@ export enum ENUM_TYPE_REASON {
   LESSOR = 'lessor',
 }
 
+export enum ENUM_PAYMENT_TYPE {
+  MEMBER_PACKAGE = 'MEMBERPACKAGE',
+  SERVICE_PACKAGE = 'SERVICEPACKAGE',
+}
+
 export const REASON_TYPE_FILTER = [
   { label: 'Tất cả', value: '' },
   { label: 'Bài viết', value: ENUM_TYPE_REASON.ARTICLE },

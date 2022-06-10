@@ -1,6 +1,11 @@
+import { ENUM_PAYMENT_TYPE } from '@/constants/base.constants';
 import { RouteApi } from '@/constants/routeApi.constants';
+import { STATISTICS_MODEL } from '@/models/Admin.model';
 import API from '../_config/repositoryApi';
-import { ReturnResponse } from '../_config/response.interface';
+import {
+  ReturnListResponse,
+  ReturnResponse,
+} from '../_config/response.interface';
 import { IParamGetListLessor, IParamGetListUser } from './Admin.interface';
 import { resGetListUser } from './Admin.type';
 
@@ -54,4 +59,16 @@ export const getListPendingLessorService = (
   params: Partial<IParamGetListLessor>
 ): Promise<ReturnResponse<resGetListUser>> => {
   return API.get(`${url}/list-lessor-need-autoapproved`, { ...params }) as any;
+};
+
+export const getArticleOfWeekStatisticService = (): Promise<
+  ReturnListResponse<STATISTICS_MODEL>
+> => {
+  return API.get(`${url}/article-of-week`) as any;
+};
+
+export const getTransactionAnnuallyStatisticService = (
+  type: ENUM_PAYMENT_TYPE
+): Promise<ReturnListResponse<STATISTICS_MODEL>> => {
+  return API.get(`${url}/statistical-transaction?type=${type}`) as any;
 };

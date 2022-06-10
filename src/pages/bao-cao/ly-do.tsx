@@ -1,5 +1,6 @@
 import Breadcrumb from '@/components/common/BreadCrumb';
 import ContainerModal from '@/components/common/ContainerModal';
+import LoadingComponent from '@/components/common/LoadingComponent';
 import SelectBoxField from '@/components/common/SelectBoxField';
 import LayoutCommon from '@/components/layout/LayoutCommon';
 import BoxSelectType from '@/components/pages/bao-cao/BoxSelectType';
@@ -66,45 +67,49 @@ const ReportReason = () => {
               + Thêm
             </button>
           </div>
-          <table className="w-full">
-            <thead className="bg-baseColor text-white rounded-[3px]">
-              <tr>
-                <th>STT</th>
-                <th>Lý do</th>
-                <th>Loại</th>
-                <th>Chi tiết</th>
-              </tr>
-            </thead>
-            <tbody className="">
-              {listData.map((item, index) => (
-                <tr key={index} className="hover:bg-slate-100">
-                  <td>{index + 1}</td>
-                  <td className="">{item.title}</td>
-                  <td>{item.type}</td>
-                  <td className="flex items-center justify-center gap-x-[10px]">
-                    <button
-                      className="button-blue"
-                      onClick={function () {
-                        actionReport.setDetailReason(item);
-                        openUpdateModal();
-                      }}
-                    >
-                      Sửa
-                    </button>
-                    <button
-                      className="button-red"
-                      onClick={function () {
-                        actionReport.setDetailReason(item);
-                        openDeleteModal();
-                      }}
-                    >
-                      Xóa
-                    </button>
-                  </td>
+          {stateReport.reasons.loading ? (
+            <LoadingComponent />
+          ) : (
+            <table className="w-full">
+              <thead className="bg-baseColor text-white rounded-[3px]">
+                <tr>
+                  <th>STT</th>
+                  <th>Lý do</th>
+                  <th>Loại</th>
+                  <th>Chi tiết</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="">
+                {listData.map((item, index) => (
+                  <tr key={index} className="hover:bg-slate-100">
+                    <td>{index + 1}</td>
+                    <td className="">{item.title}</td>
+                    <td>{item.type}</td>
+                    <td className="flex items-center justify-center gap-x-[10px]">
+                      <button
+                        className="button-blue"
+                        onClick={function () {
+                          actionReport.setDetailReason(item);
+                          openUpdateModal();
+                        }}
+                      >
+                        Sửa
+                      </button>
+                      <button
+                        className="button-red"
+                        onClick={function () {
+                          actionReport.setDetailReason(item);
+                          openDeleteModal();
+                        }}
+                      >
+                        Xóa
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
 
           <ContainerModal isVisible={createModal} closeModal={closeCreateModal}>
             <ModalCreateReason closeModal={closeCreateModal} />
