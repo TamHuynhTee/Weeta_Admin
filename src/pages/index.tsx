@@ -5,17 +5,29 @@ import CustomLineChart from '@/components/common/CustomLineChart';
 import LineHorizontal from '@/components/common/LineHorizontal';
 import LayoutCommon from '@/components/layout/LayoutCommon';
 import { ENUM_PAYMENT_TYPE } from '@/constants/base.constants';
+import { formatMoney } from '@/helpers/base.helpers';
 import { useAdmin } from '@/stores/Admin';
 import dayjs from 'dayjs';
 import React from 'react';
 
 const Home = () => {
-  const fetchData = () => {
-    console.log('first');
+  const [stateAdmin, actionAdmin] = useAdmin();
+  console.log(`stateAdmin`, stateAdmin.dashboardTotalStatistic);
+  const dashboardStatistic = stateAdmin.dashboardTotalStatistic;
+
+  const getRate = React.useCallback((prev: number, current: number): number => {
+    const distance = current - prev;
+    const denominator = prev > 0 ? prev : 1;
+    return +(distance / denominator).toFixed(2);
+  }, []);
+
+  const fetchData = async () => {
+    await actionAdmin.getDashboardTotalStatisticAsync();
   };
 
   React.useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -40,26 +52,38 @@ const Home = () => {
           </div>
           <div className="mt-[5px] grid grid-cols-4 gap-x-[10px]">
             <CardDashboardInfo
-              amount={1000000}
-              rate={14.25}
-              title="Doanh thu"
+              amount={formatMoney(dashboardStatistic[0].totalTransactions)}
+              rate={getRate(
+                dashboardStatistic[0].totalTransactionPrevMonth,
+                dashboardStatistic[0].totalTransactionInMonth
+              )}
+              title="Doanh thu (VND)"
               icon="/icons/ic_sidebar_revenue.svg"
             />
             <CardDashboardInfo
-              amount={100}
-              rate={-0.25}
+              amount={`${dashboardStatistic[1].totalArticle}`}
+              rate={getRate(
+                dashboardStatistic[1].totalArticlePrevMonth,
+                dashboardStatistic[1].totalArticleInMonth
+              )}
               title="Bài viết"
               icon="/icons/ic_sidebar_article.svg"
             />
             <CardDashboardInfo
-              amount={50}
-              rate={0}
+              amount={`${dashboardStatistic[2].totalUser}`}
+              rate={getRate(
+                dashboardStatistic[2].totalUserPrevMonth,
+                dashboardStatistic[2].totalUserInMonth
+              )}
               title="Người dùng"
               icon="/icons/ic_sidebar_user.svg"
             />
             <CardDashboardInfo
-              amount={20}
-              rate={62}
+              amount={`${dashboardStatistic[3].totalLessor}`}
+              rate={getRate(
+                dashboardStatistic[3].totalLesorPrevMonth,
+                dashboardStatistic[3].totalLessorInMonth
+              )}
               title="Môi giới"
               icon="/icons/ic_sidebar_lessor.svg"
             />

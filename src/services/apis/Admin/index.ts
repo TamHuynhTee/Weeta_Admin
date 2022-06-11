@@ -72,3 +72,32 @@ export const getTransactionAnnuallyStatisticService = (
 ): Promise<ReturnListResponse<STATISTICS_MODEL>> => {
   return API.get(`${url}/statistical-transaction?type=${type}`) as any;
 };
+
+export const getDashboardTotalStatisticService = (): Promise<
+  ReturnResponse<
+    [
+      {
+        totalTransactions: number;
+        totalTransactionPrevMonth: number;
+        totalTransactionInMonth: number;
+      },
+      {
+        totalArticle: number;
+        totalArticlePrevMonth: number;
+        totalArticleInMonth: number;
+      },
+      {
+        totalUser: number;
+        totalUserPrevMonth: number;
+        totalUserInMonth: number;
+      },
+      {
+        totalLessor: number;
+        totalLesorPrevMonth: number;
+        totalLessorInMonth: number;
+      }
+    ]
+  >
+> => {
+  return API.get(`${url}/total`) as any;
+};

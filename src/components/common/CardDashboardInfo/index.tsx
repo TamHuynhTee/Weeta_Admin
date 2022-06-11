@@ -1,4 +1,3 @@
-import { formatMoney } from '@/helpers/base.helpers';
 import LineHorizontal from '../LineHorizontal';
 
 const CardDashboardInfo = ({
@@ -11,7 +10,7 @@ const CardDashboardInfo = ({
   className?: string;
   icon: string;
   title: string;
-  amount: number;
+  amount: string;
   rate: number;
 }) => {
   return (
@@ -24,14 +23,12 @@ const CardDashboardInfo = ({
         </div>
         <div className="">
           <p className="text-[16px] font-thin text-right">{title}</p>
-          <p className="text-[20px] font-bold text-right">
-            {formatMoney(amount)}
-          </p>
+          <p className="text-[20px] font-bold text-right">{amount}</p>
         </div>
       </div>
       <LineHorizontal className="my-[10px]" />
       <div className="flex items-center justify-between">
-        <p className="text-[14px]">Tháng này</p>
+        <p className="text-[14px]">So với tháng trước</p>
         <p
           className={`text-[14px] text-right font-bold ${
             rate > 0

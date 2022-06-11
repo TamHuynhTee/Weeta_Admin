@@ -3,5 +3,6 @@ export const selector = (state: State) => {
   return {
     weeklyArticle: state.weeklyArticle,
     annuallyRevenue: state.annuallyRevenue,
+    dashboardTotalStatistic: state.dashboardTotalStatistic,
   };
 };

@@ -78,17 +78,13 @@ const ModalConfirm = (props: ModalConfirmProps) => {
               })}
               limit={600}
               value=""
-              placeholder="Giới thiệu bản thân"
+              placeholder="Lý do không duyệt"
             />
             {errors.reasonReject && (
               <ErrorText>{errors.reasonReject.message}</ErrorText>
             )}
           </div>
-          <button
-            type="submit"
-            className="button-primary w-full mt-[10px]"
-            onClick={handleConfirm}
-          >
+          <button type="submit" className="button-primary w-full mt-[10px]">
             Xác nhận
           </button>
           <button

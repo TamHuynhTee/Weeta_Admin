@@ -2,6 +2,7 @@ import { ENUM_PAYMENT_TYPE } from '@/constants/base.constants';
 import { notifyError } from '@/helpers/toast.helpers';
 import {
   getArticleOfWeekStatisticService,
+  getDashboardTotalStatisticService,
   getTransactionAnnuallyStatisticService,
 } from '@/services/apis/Admin';
 import { State } from '.';
@@ -35,6 +36,23 @@ export const getTransactionAnnuallyStatisticAsync =
         setState({
           ...getState(),
           annuallyRevenue: result.data,
+        });
+        return true;
+      }
+    }
+    notifyError(result.message);
+    return false;
+  };
+
+export const getDashboardTotalStatisticAsync =
+  () =>
+  async ({ getState, setState }: Actions) => {
+    const result = await getDashboardTotalStatisticService();
+    if (result.error !== undefined) {
+      if (!result.error) {
+        setState({
+          ...getState(),
+          dashboardTotalStatistic: result.data,
         });
         return true;
       }

@@ -1,4 +1,4 @@
 export interface STATISTICS_MODEL {
-  time: number;
+  time: string;
   value: number;
 }
