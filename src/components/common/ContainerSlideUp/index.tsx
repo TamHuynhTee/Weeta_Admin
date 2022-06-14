@@ -13,8 +13,8 @@ const SlideUpModal = (props: IProps) => {
     <React.Fragment>
       <div
         className={`${
-          !isVisible ? 'top-full' : 'top-[60px]'
-        } fixed right-0 left-0 h-[calc(100vh-60px)] bottom-0 bg-white transition-all ease-linear delay-150`}
+          !isVisible ? 'top-full' : 'top-0'
+        } fixed right-0 left-0 h-screen bottom-0 bg-white transition-all ease-linear delay-150`}
       >
         {/* Header */}
         <div className="bg-gray-200 flex items-center justify-between px-[20px] py-[5px] h-[40px]">

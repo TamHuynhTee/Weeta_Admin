@@ -4,5 +4,6 @@ export const selector = (state: State) => {
     articles: state.articles,
     lessors: state.lessors,
     pendingLessors: state.pendingLessors,
+    lessorDetail: state.lessorDetail,
   };
 };

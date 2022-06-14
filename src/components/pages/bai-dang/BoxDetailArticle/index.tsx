@@ -27,16 +27,6 @@ const BoxArticleDetail = () => {
           {/* Detail */}
           <div className="col-span-4 h-full w-full">
             <ImageSlide images={data?.image} />
-            {/* {data?.lessor._id === stateAuth.authId && (
-              <div className="flex flex-row-reverse gap-3 mt-[5px]">
-                <Link href="#!">
-                  <a className="">Chỉnh sửa</a>
-                </Link>
-                <Link href="#!">
-                  <a className="text-red-500">Ngưng bài đăng</a>
-                </Link>
-              </div>
-            )} */}
             <div className="mt-[20px]">
               <p className="font-bold text-[24px]">{data?.title}</p>
               <div className="flex items-center mt-[10px]">

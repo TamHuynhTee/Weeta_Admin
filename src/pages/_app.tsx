@@ -13,11 +13,13 @@ import { BASE_CONSTANTS } from '@/constants/base.constants';
 import SlideUpModal from '@/components/common/ContainerSlideUp';
 import { useArticle } from '@/stores/Article';
 import BoxArticleDetail from '@/components/pages/bai-dang/BoxDetailArticle';
+import { useLessor } from '@/stores/Lessor';
 
 const MyApp = ({ Component, pageProps }: any) => {
   const Layout = Component.Layout || EmptyLayout;
   const [stateAuth] = useAuth();
   const [stateArticle, actionArticle] = useArticle();
+  const [stateLessor, actionLessor] = useLessor();
 
   React.useEffect(() => {
     const token = getFromLocalStorage('token');
@@ -51,6 +53,15 @@ const MyApp = ({ Component, pageProps }: any) => {
             actionArticle.setDetailArticle(undefined);
           }}
           title="Chi tiết bài đăng"
+        >
+          <BoxArticleDetail />
+        </SlideUpModal>
+        <SlideUpModal
+          isVisible={!!stateLessor.lessorDetail}
+          closeModal={function () {
+            actionLessor.setDetailLessor(undefined);
+          }}
+          title="Duyệt CMND"
         >
           <BoxArticleDetail />
         </SlideUpModal>

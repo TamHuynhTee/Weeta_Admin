@@ -1,4 +1,5 @@
 import { notifyError } from '@/helpers/toast.helpers';
+import { ACCOUNT_MODEL } from '@/models/Account.model';
 import {
   approveIdentityService,
   getListLessorService,
@@ -88,7 +89,7 @@ export const approveIdentityAsync =
     if (result.error !== undefined) {
       if (!result.error) {
         const newList = [...getState().pendingLessors.list].filter(
-          (item) => item._id === accountId
+          (item) => item._id !== accountId
         );
         setState({
           ...getState(),
@@ -123,3 +124,12 @@ const setLoadingPendingLessor = (loading: boolean) => (actions: Actions) => {
     },
   });
 };
+
+export const setDetailLessor =
+  (lessor: ACCOUNT_MODEL | undefined) =>
+  ({ setState, getState }: Actions) => {
+    setState({
+      ...getState(),
+      lessorDetail: lessor,
+    });
+  };

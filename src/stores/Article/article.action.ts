@@ -126,7 +126,7 @@ export const approveArticleAsync =
     if (result.error !== undefined) {
       if (!result.error) {
         const newList = [...getState().pendingArticle.list].filter(
-          (item) => item._id === payload.articleId
+          (item) => item._id !== payload.articleId
         );
         setState({
           ...getState(),
@@ -150,7 +150,7 @@ export const rejectArticleAsync =
     if (result.error !== undefined) {
       if (!result.error) {
         const newList = [...getState().pendingArticle.list].filter(
-          (item) => item._id === payload.articleId
+          (item) => item._id !== payload.articleId
         );
         setState({
           ...getState(),

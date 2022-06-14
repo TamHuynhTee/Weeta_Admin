@@ -26,18 +26,26 @@ const ModalConfirm = (props: ModalConfirmProps) => {
   } = useForm();
 
   const handleConfirm = async () => {
-    await actionArticle.approveArticleAsync({
+    const result = await actionArticle.approveArticleAsync({
       articleId: stateArticle.articleDetail?._id || '',
       email: stateArticle.articleDetail?.lessor.email || '',
     });
+    if (result) {
+      closeModal();
+      actionArticle.setDetailArticle(undefined);
+    }
   };
 
   const handleReject = async (data: any) => {
-    await actionArticle.rejectArticleAsync({
+    const result = await actionArticle.rejectArticleAsync({
       articleId: stateArticle.articleDetail?._id || '',
       email: stateArticle.articleDetail?.lessor.email || '',
       reasonReject: data.reasonReject,
     });
+    if (result) {
+      closeModal();
+      actionArticle.setDetailArticle(undefined);
+    }
   };
 
   return (

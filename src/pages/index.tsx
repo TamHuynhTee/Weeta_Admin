@@ -12,13 +12,12 @@ import React from 'react';
 
 const Home = () => {
   const [stateAdmin, actionAdmin] = useAdmin();
-  console.log(`stateAdmin`, stateAdmin.dashboardTotalStatistic);
   const dashboardStatistic = stateAdmin.dashboardTotalStatistic;
 
   const getRate = React.useCallback((prev: number, current: number): number => {
-    const distance = current - prev;
+    // const distance = current - prev;
     const denominator = prev > 0 ? prev : 1;
-    return +(distance / denominator).toFixed(2);
+    return +(current / denominator / 100).toFixed(2);
   }, []);
 
   const fetchData = async () => {
