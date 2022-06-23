@@ -1,9 +1,10 @@
-import { notifyError } from '@/helpers/toast.helpers';
+import { notifyError, notifySuccess } from '@/helpers/toast.helpers';
 import { ACCOUNT_MODEL } from '@/models/Account.model';
 import {
   approveIdentityService,
   getListLessorService,
   getListPendingLessorService,
+  rejectIdentityService,
 } from '@/services/apis/Admin';
 import { IParamGetListLessor } from '@/services/apis/Admin/Admin.interface';
 import { getLessorArticleService } from '@/services/apis/Lessor';
@@ -98,6 +99,31 @@ export const approveIdentityAsync =
             total: getState().pendingLessors.total - 1,
           },
         });
+        notifySuccess('Duyệt thành công');
+        return true;
+      }
+    }
+    notifyError(result.message);
+    return false;
+  };
+
+export const rejectIdentityAsync =
+  (accountId: string) =>
+  async ({ setState, getState }: Actions) => {
+    const result = await rejectIdentityService(accountId);
+    if (result.error !== undefined) {
+      if (!result.error) {
+        const newList = [...getState().pendingLessors.list].filter(
+          (item) => item._id !== accountId
+        );
+        setState({
+          ...getState(),
+          pendingLessors: {
+            list: newList,
+            total: getState().pendingLessors.total - 1,
+          },
+        });
+        notifySuccess('Đã hủy lượt duyệt');
         return true;
       }
     }
@@ -131,5 +157,14 @@ export const setDetailLessor =
     setState({
       ...getState(),
       lessorDetail: lessor,
+    });
+  };
+
+export const setDetailPending =
+  (lessor: ACCOUNT_MODEL | undefined) =>
+  ({ setState, getState }: Actions) => {
+    setState({
+      ...getState(),
+      pendingDetail: lessor,
     });
   };

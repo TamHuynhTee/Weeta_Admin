@@ -98,6 +98,15 @@ export const setDetailArticle =
     });
   };
 
+export const setDetailPending =
+  (article: ARTICLE_MODEL | undefined) =>
+  ({ setState, getState }: Actions) => {
+    setState({
+      ...getState(),
+      pendingDetail: article,
+    });
+  };
+
 const setLoadingArticle = (loadingArticle: boolean) => (actions: Actions) => {
   actions.setState({
     ...actions.getState(),

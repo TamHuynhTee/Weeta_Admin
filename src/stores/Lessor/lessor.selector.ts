@@ -5,5 +5,6 @@ export const selector = (state: State) => {
     lessors: state.lessors,
     pendingLessors: state.pendingLessors,
     lessorDetail: state.lessorDetail,
+    pendingDetail: state.pendingDetail,
   };
 };

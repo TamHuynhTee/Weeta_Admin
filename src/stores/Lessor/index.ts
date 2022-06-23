@@ -7,6 +7,8 @@ import {
   getListPendingLessorAsync,
   approveIdentityAsync,
   setDetailLessor,
+  setDetailPending,
+  rejectIdentityAsync,
 } from './lessor.action';
 import { selector } from './lessor.selector';
 
@@ -30,6 +32,7 @@ export type State = {
     loading: boolean;
   };
   lessorDetail: ACCOUNT_MODEL | undefined;
+  pendingDetail: ACCOUNT_MODEL | undefined;
 };
 
 const initialState: State = {
@@ -52,6 +55,7 @@ const initialState: State = {
     loading: false,
   },
   lessorDetail: undefined,
+  pendingDetail: undefined,
 };
 
 const actions = {
@@ -60,6 +64,8 @@ const actions = {
   getListPendingLessorAsync,
   approveIdentityAsync,
   setDetailLessor,
+  setDetailPending,
+  rejectIdentityAsync,
 };
 
 const Store = createStore({

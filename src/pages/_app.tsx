@@ -12,8 +12,10 @@ import socketService from '@/services/sockets/baseSocket';
 import { BASE_CONSTANTS } from '@/constants/base.constants';
 import SlideUpModal from '@/components/common/ContainerSlideUp';
 import { useArticle } from '@/stores/Article';
-import BoxArticleDetail from '@/components/pages/bai-dang/BoxDetailArticle';
+import BoxDetailPendingArticle from '@/components/pages/bai-dang/BoxDetailPendingArticle';
 import { useLessor } from '@/stores/Lessor';
+import BoxDetailPending from '@/components/pages/duyet-cmnd/BoxDetailPending';
+import BoxArticleDetail from '@/components/pages/bai-dang/BoxDetailArticle';
 
 const MyApp = ({ Component, pageProps }: any) => {
   const Layout = Component.Layout || EmptyLayout;
@@ -47,23 +49,33 @@ const MyApp = ({ Component, pageProps }: any) => {
         <Component {...pageProps} />
         {/* {stateAuth.loading && <LoadingComponent />} */}
         <Toaster reverseOrder={false} position="top-center" />
+        {/* Slide up */}
+        <SlideUpModal
+          isVisible={!!stateArticle.pendingDetail}
+          closeModal={function () {
+            actionArticle.setDetailPending(undefined);
+          }}
+          title="Duyệt bài viết"
+        >
+          <BoxDetailPendingArticle />
+        </SlideUpModal>
         <SlideUpModal
           isVisible={!!stateArticle.articleDetail}
           closeModal={function () {
             actionArticle.setDetailArticle(undefined);
           }}
-          title="Chi tiết bài đăng"
+          title="Chi tiết bài viết"
         >
           <BoxArticleDetail />
         </SlideUpModal>
         <SlideUpModal
-          isVisible={!!stateLessor.lessorDetail}
+          isVisible={!!stateLessor.pendingDetail}
           closeModal={function () {
-            actionLessor.setDetailLessor(undefined);
+            actionLessor.setDetailPending(undefined);
           }}
           title="Duyệt CMND"
         >
-          <BoxArticleDetail />
+          <BoxDetailPending />
         </SlideUpModal>
       </Layout>
     </React.Fragment>

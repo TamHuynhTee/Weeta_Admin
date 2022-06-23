@@ -111,3 +111,9 @@ export const pushSearchQueries = (
     query: { ...router.query, ...query },
   });
 };
+
+export const detectMediaString = (media: string): 'image' | 'video' => {
+  const checkImage =
+    /^(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|png|svg))$/.test(media);
+  return checkImage ? 'image' : 'video';
+};

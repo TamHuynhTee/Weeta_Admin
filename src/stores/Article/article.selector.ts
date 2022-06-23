@@ -4,5 +4,6 @@ export const selector = (state: State) => {
     articles: state.article,
     pendingArticles: state.pendingArticle,
     articleDetail: state.articleDetail,
+    pendingDetail: state.pendingDetail,
   };
 };

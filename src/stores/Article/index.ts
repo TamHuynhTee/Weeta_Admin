@@ -7,6 +7,7 @@ import {
   setDetailArticle,
   approveArticleAsync,
   rejectArticleAsync,
+  setDetailPending,
 } from './article.action';
 import { selector } from './article.selector';
 
@@ -24,6 +25,7 @@ export type State = {
     loading: boolean;
   };
   articleDetail: ARTICLE_MODEL | undefined;
+  pendingDetail: ARTICLE_MODEL | undefined;
 };
 
 const initialState: State = {
@@ -40,6 +42,7 @@ const initialState: State = {
     loading: false,
   },
   articleDetail: undefined,
+  pendingDetail: undefined,
 };
 
 const actions = {
@@ -49,6 +52,7 @@ const actions = {
   setDetailArticle,
   approveArticleAsync,
   rejectArticleAsync,
+  setDetailPending,
 };
 
 const Store = createStore({

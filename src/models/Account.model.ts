@@ -14,8 +14,9 @@ export interface ACCOUNT_MODEL {
   avatar: string;
   introduction: string;
   saveArticle: Array<string>;
+  createdAt: string;
   //   lessor model
-  IDCard: string;
+  IDCard: Array<string>;
   lessorId: string;
   memberPackageId: string;
   articleTotal: number;

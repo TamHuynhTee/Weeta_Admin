@@ -31,7 +31,7 @@ const Home = () => {
 
   return (
     <React.Fragment>
-      <LayoutCommon title="Weeta Dashboard" isVisibleSearchBar>
+      <LayoutCommon isVisibleSearchBar>
         <div className="w-full px-[10px] py-[10px]">
           <Breadcrumb arr_link={[{ value: 'Dashboard', href: '/' }]} />
           {/* Info */}

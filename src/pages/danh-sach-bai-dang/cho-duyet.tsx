@@ -19,7 +19,7 @@ const ArticleList = () => {
           <Breadcrumb
             arr_link={[
               { value: 'Dashboard', href: '/' },
-              { value: 'Danh sách chưa duyệt', href: '#!' },
+              { value: 'Danh sách bài viết chưa duyệt', href: '#!' },
             ]}
           />
           <div className="mt-[10px]">
@@ -64,7 +64,7 @@ const TableArticleNotVerified = () => {
             <th>Tên bài</th>
             <th>Ngày đăng</th>
             <th>Người đăng</th>
-            <th>Chi tiết</th>
+            {/* <th>Chi tiết</th> */}
           </tr>
         </thead>
         <tbody className="">
@@ -73,14 +73,14 @@ const TableArticleNotVerified = () => {
               key={index}
               className="hover:bg-slate-100 cursor-pointer"
               onClick={function () {
-                actionArticle.setDetailArticle(item);
+                actionArticle.setDetailPending(item);
               }}
             >
               <td>{index + 1 + (currentPage - 1) * LIMIT}</td>
               <td className="max_line-1">{item.title}</td>
               <td>{dayjs(item.createdAt).format('DD/MM/YYYY')}</td>
               <td>{item.lessor?.fullname}</td>
-              <td>Hành động</td>
+              {/* <td>Hành động</td> */}
             </tr>
           ))}
         </tbody>

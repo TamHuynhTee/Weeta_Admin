@@ -43,6 +43,12 @@ export const approveIdentityService = (
   return API.post(`${url}/approvedIDCard/${accountId}`) as any;
 };
 
+export const rejectIdentityService = (
+  accountId: string
+): Promise<ReturnResponse<any>> => {
+  return API.post(`${url}/rejectIDCard/${accountId}`) as any;
+};
+
 export const getListUserService = (
   params: Partial<IParamGetListUser>
 ): Promise<ReturnResponse<resGetListUser>> => {

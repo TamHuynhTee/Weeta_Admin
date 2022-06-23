@@ -18,7 +18,7 @@ interface IProps {
 const LayoutCommon: FC<IProps> = ({
   children,
   //   isVisibleSearchBar = false,
-  title = 'Weeta',
+  title = 'Weeta Dashboard',
 }: IProps) => {
   const [modalCreateLessor, setModalCreateLessor] = React.useState(false);
   const [modalFullOfArticle, setModalFullOfArticle] = React.useState(false);
@@ -35,7 +35,7 @@ const LayoutCommon: FC<IProps> = ({
         <input type="checkbox" id="toggle_sidebar" hidden />
         <SideBar className="" />
         <div className="container_app mx-auto flex-1">
-          <header className="w-full sticky top-0 z-[100] bg-green-400">
+          <header className="w-full sticky top-0 bg-green-400">
             <div className="mx-auto px-[20px]">
               <div className="flex items-center justify-between h-[60px]">
                 <div className="flex items-center">

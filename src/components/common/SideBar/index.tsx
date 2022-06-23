@@ -19,7 +19,7 @@ const SideBar = ({ className }: { className?: string }) => {
     {
       href: '/danh-sach-bai-dang',
       icons: '/icons/ic_sidebar_article.svg',
-      label: 'Bài đăng',
+      label: 'Bài viết',
       isLink: false,
       activeCondition:
         getSplitPathName(router.pathname, 1) === 'danh-sach-bai-dang',

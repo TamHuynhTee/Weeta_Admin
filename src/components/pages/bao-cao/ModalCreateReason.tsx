@@ -17,11 +17,15 @@ const ModalCreateReason = ({ closeModal }: { closeModal: () => void }) => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({ resolver: yupResolver(schema) });
 
   const handleCreateReason = async (data: any) => {
     const result = await actionReport.createReasonAsync({ ...data });
-    if (result) closeModal();
+    if (result) {
+      reset();
+      closeModal();
+    }
   };
 
   return (

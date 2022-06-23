@@ -32,7 +32,7 @@ const ModalConfirm = (props: ModalConfirmProps) => {
     });
     if (result) {
       closeModal();
-      actionArticle.setDetailArticle(undefined);
+      actionArticle.setDetailPending(undefined);
     }
   };
 
@@ -44,7 +44,7 @@ const ModalConfirm = (props: ModalConfirmProps) => {
     });
     if (result) {
       closeModal();
-      actionArticle.setDetailArticle(undefined);
+      actionArticle.setDetailPending(undefined);
     }
   };
 

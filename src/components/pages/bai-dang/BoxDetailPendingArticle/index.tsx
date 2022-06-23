@@ -7,13 +7,17 @@ import { formatMoney } from '@/helpers/base.helpers';
 import { useArticle } from '@/stores/Article';
 import dayjs from 'dayjs';
 import React from 'react';
-import ModalStopArticle from '../ModalStopArticle';
+import ModalConfirm from '../ModalConfirm';
 
-const BoxArticleDetail = () => {
-  const [modalConfirm, setModalConfirm] = React.useState(false);
+const BoxDetailPendingArticle = () => {
+  const [modalConfirm, setModalConfirm] = React.useState({
+    visible: false,
+    confirm: false,
+  });
   const [stateArticle] = useArticle();
 
-  const stopArticle = () => setModalConfirm(true);
+  const confirm = () => setModalConfirm({ visible: true, confirm: true });
+  const reject = () => setModalConfirm({ visible: true, confirm: false });
 
   const data = stateArticle.articleDetail;
 
@@ -91,24 +95,37 @@ const BoxArticleDetail = () => {
               <WidgetLessor data={data?.lessor} />
               <div className="mt-[20px]">
                 <button
-                  className="button-outline-primary-red w-full mt-[10px]"
-                  onClick={stopArticle}
+                  className="button-outline-primary w-full"
+                  onClick={confirm}
                 >
-                  Khóa bài viết
+                  Duyệt
+                </button>
+                <button
+                  className="button-outline-primary-red w-full mt-[10px]"
+                  onClick={reject}
+                >
+                  Không duyệt
                 </button>
               </div>
             </div>
           </div>
         </div>
         <ContainerModal
-          isVisible={modalConfirm}
-          closeModal={() => setModalConfirm(false)}
+          isVisible={modalConfirm.visible}
+          closeModal={() =>
+            setModalConfirm({ ...modalConfirm, visible: false })
+          }
         >
-          <ModalStopArticle closeModal={() => setModalConfirm(false)} />
+          <ModalConfirm
+            closeModal={() =>
+              setModalConfirm({ ...modalConfirm, visible: false })
+            }
+            confirm={modalConfirm.confirm}
+          />
         </ContainerModal>
       </div>
     </React.Fragment>
   );
 };
 
-export default BoxArticleDetail;
+export default BoxDetailPendingArticle;

@@ -71,9 +71,9 @@ const TableLessorPendingIdentity = () => {
             <tr
               key={index}
               className="hover:bg-slate-100 cursor-pointer"
-              //   onClick={function () {
-              //     actionArticle.setDetailArticle(item);
-              //   }}
+              onClick={function () {
+                actionLessor.setDetailPending(item);
+              }}
             >
               <td>{index + 1 + (currentPage - 1) * LIMIT}</td>
               <td>{item.username}</td>
