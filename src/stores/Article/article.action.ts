@@ -1,4 +1,4 @@
-import { notifyError } from '@/helpers/toast.helpers';
+import { notifyError, notifySuccess } from '@/helpers/toast.helpers';
 import { ARTICLE_MODEL } from '@/models/Article.model';
 import {
   approveArticleService,
@@ -145,6 +145,7 @@ export const approveArticleAsync =
             total: getState().pendingArticle.total - 1,
           },
         });
+        notifySuccess('Đã duyệt bài');
         return true;
       }
     }

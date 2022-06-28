@@ -19,7 +19,11 @@ const BoxDetailPendingArticle = () => {
   const confirm = () => setModalConfirm({ visible: true, confirm: true });
   const reject = () => setModalConfirm({ visible: true, confirm: false });
 
-  const data = stateArticle.articleDetail;
+  const data = stateArticle.pendingDetail;
+
+  React.useEffect(() => {
+    //
+  }, []);
 
   return (
     <React.Fragment>

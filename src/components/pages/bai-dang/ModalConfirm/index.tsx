@@ -27,8 +27,8 @@ const ModalConfirm = (props: ModalConfirmProps) => {
 
   const handleConfirm = async () => {
     const result = await actionArticle.approveArticleAsync({
-      articleId: stateArticle.articleDetail?._id || '',
-      email: stateArticle.articleDetail?.lessor.email || '',
+      articleId: stateArticle.pendingDetail?._id || '',
+      email: stateArticle.pendingDetail?.lessor.email || '',
     });
     if (result) {
       closeModal();
@@ -38,8 +38,8 @@ const ModalConfirm = (props: ModalConfirmProps) => {
 
   const handleReject = async (data: any) => {
     const result = await actionArticle.rejectArticleAsync({
-      articleId: stateArticle.articleDetail?._id || '',
-      email: stateArticle.articleDetail?.lessor.email || '',
+      articleId: stateArticle.pendingDetail?._id || '',
+      email: stateArticle.pendingDetail?.lessor.email || '',
       reasonReject: data.reasonReject,
     });
     if (result) {

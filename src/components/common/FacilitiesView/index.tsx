@@ -109,7 +109,7 @@ const FacilitiesView = ({ facilities }: { facilities: FACILITIES_MODEL }) => {
                 alt=""
               />
             </span>
-            <span className="font-semibold">Sống không với chủ:</span>{' '}
+            <span className="font-semibold">Sống chung với chủ:</span>{' '}
             {facilities.liveWithOwner ? 'Có' : 'Không'}
           </div>
         </li>
